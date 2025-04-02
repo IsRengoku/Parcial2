@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace Servicios_6_8.Clases
 {
+    //clase infraccion
     public class clsInfraccion
     {
         private DBExamenEntities dbExamen = new DBExamenEntities();
