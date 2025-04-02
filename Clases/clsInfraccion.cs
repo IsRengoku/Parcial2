@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Servicios_6_8.Clases
 {
-    public class clsInfracción
+    public class clsInfraccion
     {
         private DBExamenEntities dbExamen = new DBExamenEntities();
         public Infraccion infraccion { get; set; }
@@ -77,24 +77,6 @@ namespace Servicios_6_8.Clases
                 return ex.Message;
             }
         }
-        public IQueryable ConsultarImagenesXinfraccion(int idinfraccion)
-        {
-            return from P in dbExamen.Set<Infraccion>()
-                   join TP in dbExamen.Set<Vehiculo>()
-                   on P.PlacaVehiculo equals TP.Placa
-                   join I in dbExamen.Set<FotoInfraccion>()
-                   on P.idFotoMulta equals I.idInfraccion
-                   where P.idFotoMulta == idinfraccion
-                   orderby I.NombreFoto
-                   select new
-                   {
-                       Placa = TP.Placa,
-                       Tipoinfraccion = TP.,
-                       idinfraccion = P.Codigo,
-                       infraccion = P.Nombre,
-                       idImagen = I.idImagen,
-                       Imagen = I.NombreImagen
-                   };
-        }
+        
     }
 }
