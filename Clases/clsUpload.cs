@@ -8,18 +8,14 @@ using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.WebSockets;
-using Parcial2.Clases;
-using Parcial2.Models;
 
 namespace Servicios_6_8.Clases
 {
     public class clsUpload
     {
-        DBExamenEntities dbExamen = new DBExamenEntities(); 
         public HttpRequestMessage request { get; set; }
-        public string Datos { get; set; }
-        public string Proceso { get; set; }
+        public  string Datos { get; set; }
+        public  string Proceso { get; set; }
         public async Task<HttpResponseMessage> GrabarArchivo(bool Actualizar)
         {
             string RptaError = "";
@@ -67,7 +63,6 @@ namespace Servicios_6_8.Clases
                     else
                     {
                         Archivos.Add(fileName);
-                        dbExamen.SaveChanges();
                         //Se renombra el archivo
                         File.Move(file.LocalFileName, Path.Combine(root, fileName));
                     }
@@ -126,11 +121,11 @@ namespace Servicios_6_8.Clases
         {
             switch (Proceso.ToUpper())
             {
-                case "INFRACCION":
-                    clsImagen ImagenesInfraccion = new clsImagen();
-                    ImagenesInfraccion.idFoto = Datos;//Debe venir la información que se procesa en la base de datos, para nuestro caso, el código del Infraccion
-                    ImagenesInfraccion.Archivos = Archivos;
-                    return ImagenesInfraccion.GrabarImagenes();
+                case "PRODUCTO":
+                    clsImagenesProducto ImagenesProducto = new clsImagenesProducto();
+                    ImagenesProducto.idProducto = Datos;//Debe venir la información que se procesa en la base de datos, para nuestro caso, el código del producto
+                    ImagenesProducto.Archivos = Archivos;
+                    return ImagenesProducto.GrabarImagenes();
                 default:
                     return "Proceso no válido";
             }
